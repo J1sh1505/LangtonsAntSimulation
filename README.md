@@ -1,49 +1,78 @@
-README: Langton's Ant Parallel Simulation (PRAC1)
-This project implements a high-performance, parallelized version of Langton's Ant, a cellular automaton. It is designed to satisfy the requirements for the PRAC1 Assessment, demonstrating the use of Java's concurrency frameworks to handle a massive grid and multiple independent ant colonies.
+# 🐜 Langton's Ant Parallel Simulation
 
-## Core Features
-Three Implementations: Compares Sequential, ExecutorService (Fixed Thread Pool), and ForkJoinPool (Work-Stealing).
+A high-performance, parallelized implementation of the **Langton's Ant** cellular automaton. This project leverages Java’s advanced concurrency frameworks to efficiently simulate multiple independent ant colonies across a massive coordinate system.
 
-Massive Grid Handling: Uses a Sparse Grid strategy with ConcurrentHashMap for memory efficiency.
+---
 
-Advanced GUI: * 3x3 Colony Grid: Spawns 45 ants across 9 distinct regions.
+### 🚀 Core Features
 
-Interactive Controls: Start/Pause, Speed Slider, and Step Counter.
+* **Parallel Execution Engines** Compare performance across three distinct modes:
+  * **Sequential:** Single-threaded baseline.
+  * **ExecutorService:** Fixed thread pool parallelism.
+  * **ForkJoinPool:** Recursive "Divide and Conquer" with work-stealing.
 
-Dynamic Camera: Mouse wheel to Zoom, Right-Click and Drag to Pan.
+* **Scalable Sparse Grid** Utilizes a `ConcurrentHashMap` strategy to manage a **10,000 × 10,000** coordinate system with minimal memory overhead and high thread safety.
 
-## Prerequisites
-JDK 17 or higher (required for modern switch expressions and improved ForkJoin performance).
+* **Distributed Colonies** Features a pre-configured **3x3 grid layout** spawning 45 ants in distinct regions to observe complex emergent behaviors and "highway" collisions.
 
-VS Code with the Extension Pack for Java (recommended).
+* **Interactive Visualization** * **Real-time HUD:** Monitor step counts and simulation metrics live.
+  * **Dynamic Camera:** Seamlessly **Zoom** (Mouse Wheel) and **Pan** (Right-Click + Drag).
+  * **Granular Speed:** Adjustable delay settings to study specific patterns.
 
-## Terminal Commands
-To run this simulation via the terminal, navigate to the root folder (LangtonsAntSimulation) and execute the following:
+---
 
-1. Compile the Project
-This command compiles all Java files from the different packages and places the .class files into a bin folder.
+### 📋 Prerequisites
 
-Bash
+* **Java Development Kit (JDK) 17** or higher.
+* **Git** for version control.
+
+---
+
+### 🛠️ Getting Started
+
+#### 1. Compile the Project
+Build the project by compiling all packages into the `bin` directory:
+```bash
 javac -d bin src/core/*.java src/sequential/*.java src/parallel/*.java src/gui/*.java src/Main.java
-2. Run the Benchmarking & Simulation
-This command executes the Main class. It will first run performance tests in the terminal and then launch the GUI.
 
-Bash
+---
+
+#### 2. Run the Simulation
+Execute the application to trigger benchmarking results followed by the interactive GUI:
+```bash
 java -cp bin Main
-## How to Use the GUI
-Start/Pause: Click the button at the bottom to begin the simulation.
 
-Speed: Adjust the Delay (ms) slider (Lower delay = Higher speed).
+---
 
-Zoom: Use the Mouse Wheel over the canvas to zoom in/out.
+### 🎮 Usage Controls
 
-Pan: Right-Click and Drag to move the view across the grid to see different colonies.
+Action,Control
+Start / Pause,Toggle button in the control panel
+Zooming,Mouse Wheel (Scroll up/down)
+Panning,Right-Click + Drag over the grid
+Adjust Speed,Slider (Lower delay = Higher speed)
 
-## Performance Comparison (For Report)
-When you run the Main class, the terminal will output the execution time for 10,000 steps across three modes:
+Note: The simulation begins with a benchmarking phase in the terminal to compare the efficiency of different parallel frameworks before launching the graphical window.
 
-Sequential: The baseline single-threaded performance.
+---
 
-ExecutorService: Fixed-pool parallelism (usually the fastest for this scale).
+### Project Structure 
 
-Fork/Join: Recursive divide-and-conquer parallelism (uses Work-Stealing).
+LangtonsAntSimulation/
+├── bin/                    # Compiled .class files
+├── src/
+│   ├── core/               # Shared logic and data structures
+│   │   ├── Ant.java        # Ant movement and state rules
+│   │   ├── Grid.java       # Sparse grid using ConcurrentHashMap
+│   │   └── SimulationLogic.java (Empty)
+│   ├── gui/                # User interface components
+│   │   └── SimulationGUI.java # Swing-based window, zoom/pan logic
+│   ├── parallel/           # Parallel implementation frameworks
+│   │   ├── ExecutorAnt.java # Fixed thread pool implementation
+│   │   ├── ForkJoinAnt.java # Main ForkJoin entry point
+│   │   └── RegionTask.java  # Recursive task for Work-Stealing
+│   ├── sequential/         # Baseline performance logic
+│   │   └── SequentialAnt.java # Single-threaded implementation
+│   └── Main.java           # Entry point: Benchmarking and GUI launch
+├── README.md               # Project documentation
+└── .gitignore              # Files for Git to ignore (like bin/)
