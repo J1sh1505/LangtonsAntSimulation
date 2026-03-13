@@ -1,0 +1,9 @@
+# Compiled Java class files
+bin/
+*.class
+
+# Visual Studio Code specific files
+.vscode/
+
+# Temporary or log files
+*.log
