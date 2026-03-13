@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         int gridWidth = 10000;  
         int gridHeight = 10000; 
-        int numAnts = 50;       
+        int numAnts = 135;       
         int steps = 10000;
 
         System.out.println("=== Langton's Ant Performance Benchmarking ===");
@@ -61,10 +61,9 @@ public class Main {
     List<Ant> ants = new ArrayList<>();
     int rows = 3;
     int cols = 3;
-    int antsPerColony = 5;
-    int spacing = 200; // How far apart the colonies are
+    int antsPerColony = 15; // Updated to 15
+    int spacing = 200; 
     
-    // Starting coordinates for the top-left colony
     int startX = 400; 
     int startY = 400;
 
@@ -78,9 +77,6 @@ public class Main {
             }
         }
     }
-    
-    
     return ants;
-
     }
 }
